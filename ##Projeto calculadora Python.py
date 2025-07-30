@@ -1,6 +1,8 @@
 ##Projeto calculadora Python
 
-import os
+import os, math
+from operator import sub, truediv
+from functools import reduce
 
 def exibir_nome_calculadora():
     print("🇧 🇪 🇲  🇻 🇮 🇳 🇩 🇴  🇦  🇨 🇦 🇱 🇨 🇺 🇱 🇦 🇩 🇴 🇷 🇦  🇩 🇴  🇫 🇮 🇫 🇮 !!")
@@ -36,45 +38,44 @@ def funcao_voltar_menu():
 
 def soma():
     try:
-        a,b = list(map(int, input("Digite dois números separados por espaço: ").split()))
-        resultado = a + b
-        print(f"{resultado}")
+        numeros = list(map(int, input("Digite os numeros separados por espaco: ").split()))
+        resultado = sum(numeros)
+        print(" + ".join(map(str, numeros)) + f" = {resultado}")
         funcao_voltar_menu()
-    except:
+    except ValueError:
         opcao_invalida()
 
 def subtracao():
     try:
-        a,b = list(map(int, input("Digite dois números separados por espaço: ").split()))
-        resultado = a - b
-        print(f"{resultado}")
+        numeros = list(map(int, input("Digite os numeros separados por espaco: ").split()))
+        resultado = reduce(sub, numeros)
+        print(" - ".join(map(str, numeros)) + f" = {resultado}")
         funcao_voltar_menu()
-    except:
+    except ValueError:
         opcao_invalida()
 
 def multiplicacao():
     try:
-        a,b = list(map(int, input("Digite dois números separados por espaço: ").split()))
-        resultado = a * b
-        print(f"{resultado}")
+        numeros = list(map(int, input("Digite os numeros separados por espaco: ").split()))
+        resultado = math.prod(numeros)
+        print(" X ".join(map(str, numeros)) + f" = {resultado}")
         funcao_voltar_menu()
-    except:
+    except ValueError:
         opcao_invalida()
 
 def divisao():
-    try:
-        a,b = list(map(int, input("Digite dois números separados por espaço: ").split()))
-        resultado = a / b
-        print(f"{resultado}")
+   try:
+        numeros = list(map(int, input("Digite os numeros separados por espaco: ").split()))
+        resultado = reduce(truediv, numeros)
+        print(" / ".join(map(str, numeros)) + f" = {resultado}")
         funcao_voltar_menu()
-    except:
+   except ValueError:
         opcao_invalida()
 
 def escolher_opcao():
     try:
         opcao_escolhida = int(input("Escolha uma das opções: "))
         if opcao_escolhida == 1:
-            limpar_terminal()
             soma()
         elif opcao_escolhida == 2: 
             subtracao()
@@ -86,7 +87,7 @@ def escolher_opcao():
             subtracao()
         else:
             opcao_invalida()       
-    except:
+    except ValueError:
         opcao_invalida()
 
 def main():
